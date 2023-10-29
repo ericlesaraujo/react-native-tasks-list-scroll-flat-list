@@ -26,13 +26,22 @@ export const Home = () => {
                     title: newTask ? newTask : 'Registro vazio',
                 };
                 setTarefas([...tarefas, dados]);
+                setNewTask('');
             };
+
+            const removerTarefa = (id: string) => {
+              const tarefasAtualizadas = tarefas.filter((tarefa) =>
+               tarefa.id !== id);
+                setTarefas(tarefasAtualizadas);
+            };
+                
+                
         
 
     return (
         <View style={styles.container}>
             <Text style={styles.title}>Tarefas do dia</Text>
-            <TextInput onChangeText={setNewTask} placeholderTextColor='#555' placeholder="Tarefas" style={styles.fields} />
+            <TextInput onChangeText={setNewTask} value={newTask} placeholderTextColor='#555' placeholder="Tarefas" style={styles.fields} />
             <TouchableOpacity onPress={adcTarefa} activeOpacity={0.7} style={styles.button}>
                 <Text style={styles.buttonText}>Entrar</Text>
             </TouchableOpacity>
@@ -51,7 +60,7 @@ export const Home = () => {
                 data={tarefas}
                 keyExtractor={(item: Tarefa) => item.id}
                 renderItem={({item} : {item: Tarefa}) => (
-                    <TouchableOpacity>
+                    <TouchableOpacity style={styles.renderList}>
                         <Text style={styles.buttonText}>{item.title}</Text>
                     </TouchableOpacity>
                 )}
@@ -95,6 +104,13 @@ const styles = StyleSheet.create({
     buttonText: {
         color: '#fff',
         fontSize: 15,
-    }
+    },
+    renderList: {
+        backgroundColor: 'rgb(192, 192, 192)',
+        padding: 10,
+        marginTop: 10,
+        borderRadius: 50,
+        alignItems: 'center',
+    },
   });
   
