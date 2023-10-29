@@ -60,7 +60,7 @@ export const Home = () => {
                 data={tarefas}
                 keyExtractor={(item: Tarefa) => item.id}
                 renderItem={({item} : {item: Tarefa}) => (
-                    <TouchableOpacity style={styles.renderList}>
+                    <TouchableOpacity onPress={() => removerTarefa(item.id)} style={styles.renderList}>
                         <Text style={styles.buttonText}>{item.title}</Text>
                     </TouchableOpacity>
                 )}
